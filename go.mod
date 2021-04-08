@@ -2,4 +2,7 @@ module github.com/douglasdennys/go-mongodb
 
 go 1.16
 
-require go.mongodb.org/mongo-driver v1.5.1
+require (
+	github.com/bxcodec/faker/v3 v3.6.0
+	go.mongodb.org/mongo-driver v1.5.1
+)

@@ -1,0 +1,24 @@
+version: "3.9"
+
+services:
+  app:
+    build: .
+    container_name: go-app
+    ports:
+    - "8080:8080"
+    restart: "unless-stopped"
+    networks:
+      - go-mongodb
+
+  db:
+    image: mongo:4.4
+    container_name: mongo-db
+    ports:
+    - "27017:27017"
+    restart: "unless-stopped"
+    networks:
+      - go-mongodb:
+
+networks:
+  go-mongodb:
+    external: true
