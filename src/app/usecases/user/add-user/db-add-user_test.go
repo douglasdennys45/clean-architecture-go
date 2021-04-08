@@ -2,15 +2,15 @@ package add_user
 
 import (
 	"errors"
-	mocks2 "github.com/douglasdennys/go-mongodb/src/app/mocks"
 	"github.com/douglasdennys/go-mongodb/src/app/protocols"
-	"github.com/douglasdennys/go-mongodb/src/domain/mocks"
+	mocks2 "github.com/douglasdennys/go-mongodb/src/app/test"
+	"github.com/douglasdennys/go-mongodb/src/domain/test"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
 func TestApp_Add(t *testing.T) {
-	f := mocks.MockAddUserParam()
+	f := test.MockAddUserParam()
 	mock := protocols.AddUserParamRepo{f}
 
 	faker := mocks2.NewMockAddUserRepositorySpy()

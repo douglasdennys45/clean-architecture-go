@@ -7,32 +7,26 @@ import (
 	"time"
 )
 
-var StringURL string
-var DbName string
-var Conn *mongo.Client
-var Db *mongo.Database
+var stringURL string
+var dbName string
+var conn *mongo.Client
+var db *mongo.Database
 
 func Connect(url string, name string) error {
-	StringURL = url
-	DbName = name
+	stringURL = url
+	dbName = name
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 	client, err := mongo.Connect(ctx, options.Client().ApplyURI(url))
-	if err != nil {
-		return err
-	}
-	Conn = client
-	Db = client.Database(name)
-	return nil
+	conn = client
+	db = client.Database(name)
+	return err
 }
 
 func GetCollection(name string) *mongo.Collection {
-	return Db.Collection(name)
+	return db.Collection(name)
 }
 
 func Disconnect() error {
-	if err := Conn.Disconnect(context.Background()); err != nil {
-		panic(err)
-	}
-	return nil
+	return conn.Disconnect(context.Background())
 }
