@@ -1,15 +1,17 @@
 package mocks
 
 import (
-	"github.com/bxcodec/faker/v3"
 	"github.com/douglasdennys/go-mongodb/src/app/protocols"
 )
 
-func MockAddUserParamRepo() *protocols.AddUserParamRepo {
-	mock := protocols.AddUserParamRepo{}
-	err := faker.FakeData(&mock)
-	if err != nil {
-		panic(err)
-	}
-	return &mock
+/** Created mock interface AddUserRepository */
+type addUserRepositorySpy struct {}
+
+func NewMockAddUserRepositorySpy() protocols.AddUserRepository {
+	return &addUserRepositorySpy{}
 }
+
+func (mock *addUserRepositorySpy) Add(addUser *protocols.AddUserParamRepo) error {
+	return nil
+}
+/** Created mock interface AddUserRepository */
