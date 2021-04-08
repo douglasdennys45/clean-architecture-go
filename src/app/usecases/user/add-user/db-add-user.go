@@ -18,6 +18,7 @@ func NewDbAddUser(addUserRepo protocols.AddUserRepository) DbAddUser {
 }
 
 func (a *app) Add(addUser *user.AddUserParam) error {
-	err := a.addUserRepo.Add(addUser)
+	param := protocols.AddUserParamRepo{addUser}
+	err := a.addUserRepo.Add(&param)
 	return err
 }
