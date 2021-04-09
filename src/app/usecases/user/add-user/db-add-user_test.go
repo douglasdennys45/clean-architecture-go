@@ -14,7 +14,24 @@ func TestApp_Add(t *testing.T) {
 	mock := user.AddUserParamRepo{f}
 
 	faker := mocks2.NewMockAddUserRepositorySpy()
-	app := NewDbAddUser(faker)
+	crypto := mocks2.NewCriptographySuccessSpy()
+	app := NewDbAddUser(faker, crypto)
+
+	err := app.Add(mock.AddUserParam)
+	assert.Nil(t, err)
+
+	err2 := app.Add(mock.AddUserParam)
+	err2 = errors.New("error")
+	assert.NotNil(t, err2)
+}
+
+func TestApp_AddFailed(t *testing.T) {
+	f := test.MockAddUserParam()
+	mock := user.AddUserParamRepo{f}
+
+	faker := mocks2.NewMockAddUserRepositorySpy()
+	crypto := mocks2.NewCriptographySpy()
+	app := NewDbAddUser(faker, crypto)
 
 	err := app.Add(mock.AddUserParam)
 	assert.Nil(t, err)

@@ -1,4 +1,4 @@
-package mocks
+package test
 
 import (
 	"github.com/douglasdennys/go-mongodb/src/app/protocols/db/user"
