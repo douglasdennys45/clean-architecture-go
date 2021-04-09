@@ -17,8 +17,7 @@ services:
     - "27017:27017"
     restart: "unless-stopped"
     networks:
-      - go-mongodb:
+      - go-mongodb
 
 networks:
   go-mongodb:
-    external: true
