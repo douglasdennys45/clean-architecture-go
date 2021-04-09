@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/douglasdennys/go-mongodb/src/infra/db/mongodb/helpers"
-	"github.com/douglasdennys/go-mongodb/src/main/config"
+	"github.com/douglasdennys/go-mongodb/src/core/config"
 	"github.com/joho/godotenv"
 	"os"
 )
