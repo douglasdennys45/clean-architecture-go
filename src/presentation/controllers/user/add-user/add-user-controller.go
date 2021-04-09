@@ -23,12 +23,9 @@ func NewAddUserController(add add_user.DbAddUser, valid protocols.Validation) Ad
 
 func (c controller) Handle(httpRequest protocols.HttpRequest) protocols.HttpResponse {
 	var body user.AddUserParam
-	err := json.Unmarshal(httpRequest.Body, &body)
-	if err != nil {
-		return http.ServerError(err)
-	}
+	_ = json.Unmarshal(httpRequest.Body, &body)
 
-	err = c.valid.Validate(body)
+	err := c.valid.Validate(body)
 	if err != nil {
 		return http.BadRequest(err)
 	}
@@ -37,5 +34,5 @@ func (c controller) Handle(httpRequest protocols.HttpRequest) protocols.HttpResp
 	if err != nil {
 		return http.ServerError(err)
 	}
-	return http.Ok(err)
+	return http.Created(nil)
 }

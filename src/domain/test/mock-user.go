@@ -15,6 +15,16 @@ func MockAddUserParam() *user.AddUserParam {
 	return &mock
 }
 
+func MockAddUserParamNotValid() *user.AddUserParam {
+	mock := user.AddUserParam{}
+	err := faker.FakeData(&mock)
+	if err != nil {
+		panic(err)
+	}
+	mock.Name = ""
+	return &mock
+}
+
 func MockUserEntity() *entities.UserEntity {
 	mock := entities.UserEntity{}
 	err := faker.FakeData(&mock)
