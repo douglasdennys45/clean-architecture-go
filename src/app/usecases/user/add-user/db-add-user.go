@@ -1,7 +1,7 @@
 package add_user
 
 import (
-	"github.com/douglasdennys/go-mongodb/src/app/protocols"
+	user2 "github.com/douglasdennys/go-mongodb/src/app/protocols/db/user"
 	"github.com/douglasdennys/go-mongodb/src/domain/usecases/user"
 )
 
@@ -10,15 +10,15 @@ type DbAddUser interface {
 }
 
 type app struct {
-	addUserRepo protocols.AddUserRepository
+	addUserRepo user2.AddUserRepository
 }
 
-func NewDbAddUser(addUserRepo protocols.AddUserRepository) DbAddUser {
+func NewDbAddUser(addUserRepo user2.AddUserRepository) DbAddUser {
 	return &app{addUserRepo}
 }
 
 func (a *app) Add(addUser *user.AddUserParam) error {
-	param := protocols.AddUserParamRepo{addUser}
+	param := user2.AddUserParamRepo{addUser}
 	err := a.addUserRepo.Add(&param)
 	return err
 }

@@ -2,12 +2,12 @@ package user
 
 import (
 	"context"
-	"github.com/douglasdennys/go-mongodb/src/app/protocols"
+	"github.com/douglasdennys/go-mongodb/src/app/protocols/db/user"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
 type UserMongoRepository interface {
-	protocols.AddUserRepository
+	user.AddUserRepository
 }
 
 type repository struct {
@@ -18,7 +18,7 @@ func NewUserMongoRepository(collection *mongo.Collection) UserMongoRepository {
 	return &repository{collection}
 }
 
-func (r repository) Add(addUser *protocols.AddUserParamRepo) error {
+func (r repository) Add(addUser *user.AddUserParamRepo) error {
 	_, err := r.collection.InsertOne(context.Background(), addUser)
 	return err
 }

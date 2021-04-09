@@ -1,4 +1,4 @@
-package protocols
+package user
 
 import "github.com/douglasdennys/go-mongodb/src/domain/usecases/user"
 

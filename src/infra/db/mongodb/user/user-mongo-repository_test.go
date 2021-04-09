@@ -3,7 +3,7 @@ package user
 import (
 	"errors"
 	"github.com/benweissmann/memongo"
-	"github.com/douglasdennys/go-mongodb/src/app/protocols"
+	"github.com/douglasdennys/go-mongodb/src/app/protocols/db/user"
 	"github.com/douglasdennys/go-mongodb/src/domain/test"
 	"github.com/douglasdennys/go-mongodb/src/infra/db/mongodb/helpers"
 	"github.com/stretchr/testify/assert"
@@ -25,7 +25,7 @@ func NewMockUserMongoRepositorySpy() *mongo.Collection {
 
 func TestRepository_Add(t *testing.T) {
 	f := test.MockAddUserParam()
-	mock := protocols.AddUserParamRepo{f}
+	mock := user.AddUserParamRepo{f}
 
 	faker := NewMockUserMongoRepositorySpy()
 	repo := NewUserMongoRepository(faker)
