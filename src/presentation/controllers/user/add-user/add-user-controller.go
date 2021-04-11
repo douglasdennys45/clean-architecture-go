@@ -2,7 +2,6 @@ package add_user
 
 import (
 	"encoding/json"
-	add_user "github.com/douglasdennys/go-mongodb/src/app/usecases/user/add-user"
 	"github.com/douglasdennys/go-mongodb/src/domain/usecases/user"
 	"github.com/douglasdennys/go-mongodb/src/presentation/helpers/http"
 	"github.com/douglasdennys/go-mongodb/src/presentation/protocols"
@@ -17,7 +16,7 @@ type controller struct {
 	valid protocols.Validation
 }
 
-func NewAddUserController(add add_user.DbAddUser, valid protocols.Validation) AddUserController {
+func NewDbAddUserController(add user.AddUser, valid protocols.Validation) AddUserController {
 	return &controller{add, valid}
 }
 

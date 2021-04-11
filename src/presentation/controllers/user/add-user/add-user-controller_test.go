@@ -15,7 +15,7 @@ func TestController_Handle(t *testing.T) {
 	httpRequest.Body = cur
 	addUserSpy := presentation.NewMockAddUserSpy()
 	validationSpy := presentation.NewMockValidateSpy()
-	controller := NewAddUserController(addUserSpy, validationSpy)
+	controller := NewDbAddUserController(addUserSpy, validationSpy)
 	response := controller.Handle(httpRequest)
 	assert.Equal(t, 201, response.Code)
 	assert.Equal(t, nil, response.Data)
@@ -27,7 +27,7 @@ func TestController_HandleNotValid(t *testing.T) {
 	httpRequest.Body = cur
 	addUserSpy := presentation.NewMockAddUserSpy()
 	validationSpy := presentation.NewMockValidateNotValidSpy()
-	controller := NewAddUserController(addUserSpy, validationSpy)
+	controller := NewDbAddUserController(addUserSpy, validationSpy)
 	response := controller.Handle(httpRequest)
 	assert.Equal(t, 400, response.Code)
 }
@@ -38,7 +38,7 @@ func TestController_HandleError(t *testing.T) {
 	httpRequest.Body = cur
 	addUserSpy := presentation.NewMockAddUserNotValidSpy()
 	validationSpy := presentation.NewMockValidateSpy()
-	controller := NewAddUserController(addUserSpy, validationSpy)
+	controller := NewDbAddUserController(addUserSpy, validationSpy)
 	response := controller.Handle(httpRequest)
 	assert.Equal(t, 500, response.Code)
 }

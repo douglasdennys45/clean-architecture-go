@@ -8,5 +8,5 @@ import (
 )
 
 func MakeAddUserController() protocols.Controller {
-	return controllers.NewAddUserController(usecases.MakeDbAddUser(), factories.MakeValidation())
+	return controllers.NewDbAddUserController(usecases.MakeDbAddUser(), factories.MakeValidation())
 }

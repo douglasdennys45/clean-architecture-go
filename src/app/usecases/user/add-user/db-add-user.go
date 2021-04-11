@@ -6,7 +6,7 @@ import (
 	bcrypt_adapter "github.com/douglasdennys/go-mongodb/src/infra/criptography/bcrypt-adapter"
 )
 
-type DbAddUser interface {
+type dbAddUser interface {
 	user.AddUser
 }
 
@@ -15,7 +15,7 @@ type app struct {
 	crypto bcrypt_adapter.BcryptAdapter
 }
 
-func NewDbAddUser(addUserRepo user2.AddUserRepository, crypto bcrypt_adapter.BcryptAdapter) DbAddUser {
+func NewDbAddUser(addUserRepo user2.AddUserRepository, crypto bcrypt_adapter.BcryptAdapter) dbAddUser {
 	return &app{addUserRepo, crypto}
 }
 
