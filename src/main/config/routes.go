@@ -1,7 +1,7 @@
 package config
 
 import (
-	"github.com/douglasdennys/go-mongodb/src/core/routes"
+	"github.com/douglasdennys/go-mongodb/src/main/routes"
 	"github.com/labstack/echo/v4"
 )
 

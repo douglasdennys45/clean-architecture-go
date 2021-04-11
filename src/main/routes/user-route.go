@@ -1,9 +1,9 @@
 package routes
 
 import (
-	"github.com/douglasdennys/go-mongodb/src/core/adapters"
-	controller "github.com/douglasdennys/go-mongodb/src/core/factories/controllers/user/add-user"
-	controllers "github.com/douglasdennys/go-mongodb/src/core/factories/controllers/user/load-user-by-email"
+	"github.com/douglasdennys/go-mongodb/src/main/adapters"
+	controller "github.com/douglasdennys/go-mongodb/src/main/factories/controllers/user/add-user"
+	controllers "github.com/douglasdennys/go-mongodb/src/main/factories/controllers/user/load-user-by-email"
 	"github.com/labstack/echo/v4"
 )
 
