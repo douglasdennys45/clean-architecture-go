@@ -50,3 +50,14 @@ func TestRepository_LoadByEmail(t *testing.T) {
 	assert.Nil(t, err)
 	assert.NotNil(t, response)
 }
+
+func TestRepository_LoadByEmailEmpty(t *testing.T) {
+	f := test.MockAddUserParam()
+
+	faker := NewMockUserMongoRepositorySpy()
+	repo := NewUserMongoRepository(faker)
+
+	response, err := repo.LoadByEmail(f.Email)
+	assert.Nil(t, err)
+	assert.Nil(t, response)
+}

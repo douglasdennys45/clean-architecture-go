@@ -38,5 +38,8 @@ func (r *repository) Add(addUser *user.AddUserParamRepo) error {
 func (r *repository) LoadByEmail(email string) (*user.UserRepo, error) {
 	var userRepo user.UserRepo
 	err := r.collection.FindOne(context.Background(), bson.M{"email": email}).Decode(&userRepo.UserEntity)
+	if err != nil && err.Error() == "mongo: no documents in result" {
+		return nil, nil
+	}
 	return &userRepo, err
 }
