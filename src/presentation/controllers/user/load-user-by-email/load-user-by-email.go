@@ -1,4 +1,4 @@
-package add_user
+package load_user_by_email
 
 import (
 	"encoding/json"
@@ -7,31 +7,29 @@ import (
 	"github.com/douglasdennys/go-mongodb/src/presentation/protocols"
 )
 
-type addUserController interface {
+type loadUserByEmailController interface {
 	protocols.Controller
 }
 
 type controller struct {
-	addUser user.AddUser
-	valid protocols.Validation
+	loadUser user.LoadUserByEmail
 }
 
-func NewDbAddUserController(add user.AddUser, valid protocols.Validation) addUserController {
-	return &controller{add, valid}
+func NewDbLoadUserByEmailController(loadUser user.LoadUserByEmail) loadUserByEmailController {
+	return &controller{loadUser}
+}
+
+type search struct {
+	Email string `json:"email"`
 }
 
 func (c controller) Handle(httpRequest protocols.HttpRequest) protocols.HttpResponse {
-	var body user.AddUserParam
+	var body search
 	_ = json.Unmarshal(httpRequest.Body, &body)
 
-	err := c.valid.Validate(body)
-	if err != nil {
-		return http.BadRequest(err)
-	}
-
-	err = c.addUser.Add(&body)
+	response, err := c.loadUser.LoadByEmail(body.Email)
 	if err != nil {
 		return http.ServerError(err)
 	}
-	return http.Created(nil)
+	return http.Ok(response)
 }
