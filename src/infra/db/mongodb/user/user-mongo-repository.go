@@ -3,12 +3,14 @@ package user
 import (
 	"context"
 	"github.com/douglasdennys/go-mongodb/src/app/protocols/db/user"
+	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"time"
 )
 
 type UserMongoRepository interface {
 	user.AddUserRepository
+	user.LoadUserByEmailRepository
 }
 
 type userData struct {
@@ -28,7 +30,13 @@ func NewUserMongoRepository(collection *mongo.Collection) UserMongoRepository {
 	return &repository{collection}
 }
 
-func (r repository) Add(addUser *user.AddUserParamRepo) error {
+func (r *repository) Add(addUser *user.AddUserParamRepo) error {
 	_, err := r.collection.InsertOne(context.Background(), &userData{addUser.AddUserParam.Name, addUser.AddUserParam.Email, addUser.AddUserParam.Password, true, time.Now(), time.Now()})
 	return err
+}
+
+func (r *repository) LoadByEmail(email string) (*user.UserRepo, error) {
+	var userRepo user.UserRepo
+	err := r.collection.FindOne(context.Background(), bson.M{"email": email}).Decode(&userRepo.UserEntity)
+	return &userRepo, err
 }
