@@ -1,10 +1,7 @@
 package config
 
-import (
-	"github.com/douglasdennys/go-mongodb/src/main/routes"
-	"github.com/labstack/echo/v4"
-)
+import "github.com/douglasdennys/clean-architecture-go/src/main/routes"
 
-func Routes(router *echo.Echo) {
-	routes.UserRouter(router)
+func Routes() {
+	routes.LogRoutes()
 }

@@ -1,18 +1,23 @@
 package adapters
 
 import (
-	"github.com/douglasdennys/go-mongodb/src/presentation/protocols"
-	"github.com/labstack/echo/v4"
+	"encoding/json"
+	"github.com/douglasdennys/clean-architecture-go/src/adapters/controllers/ports"
+	"github.com/douglasdennys/clean-architecture-go/src/adapters/controllers/usecases"
 	"io/ioutil"
+	"net/http"
 )
 
-func AdapterRouter(controller protocols.Controller) echo.HandlerFunc {
-	return func (ctx echo.Context) error {
-		var req protocols.HttpRequest
-		body, _ := ioutil.ReadAll(ctx.Request().Body)
-		req.Body = body
+func AdaptRouter(controller usecases.Controller) http.HandlerFunc {
+	return func (w http.ResponseWriter, req *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		var httpRequest ports.HttpRequest
+		converter, _ := ioutil.ReadAll(req.Body)
+		httpRequest.Body = converter
+		response := controller.Handle(httpRequest)
 
-		res := controller.Handle(req)
-		return ctx.JSON(res.Code, res.Data)
+		w.WriteHeader(response.StatusCode)
+		_ = json.NewEncoder(w).Encode(response.Body)
+		return
 	}
 }

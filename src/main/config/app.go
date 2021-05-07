@@ -1,12 +1,15 @@
 package config
 
 import (
-	"github.com/labstack/echo/v4"
+	"fmt"
+	"net/http"
 )
 
 func StartApp() {
-	router := echo.New()
-	Routes(router)
-
-	router.Logger.Fatal(router.Start(":8080"))
+	Routes()
+	fmt.Println("started server")
+	err := http.ListenAndServe(":8080", nil)
+	if err != nil {
+		panic(err)
+	}
 }
